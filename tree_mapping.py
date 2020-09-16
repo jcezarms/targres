@@ -5,9 +5,10 @@ from tqdm import tqdm
 
 from data_filters import find_claim, is_thesis, is_zeroth_node, useful_claims_from, useful_discussions_from
 
-VOTES = {}
-PARENTS = {}
-CHILDREN = {}
+METADATA = {}
+votes = 'votes'
+parents = 'parents'
+children = 'children'
 
 location_keys = ['isOrigin', 'parentId', 'relation', 'isDeleted']
 vote_types = ['false', 'improbable', 'plausible', 'probable', 'true']
@@ -29,14 +30,14 @@ def merge_location_data(claim, discussion):
         location = location[0]
         parent_id = location['parentId']
 
-        PARENTS[claim['id']] = find_claim(parent_id, discussion)
-        CHILDREN[parent_id] = (CHILDREN.get(parent_id) or []) + [claim]
+        METADATA[parents][claim['id']] = find_claim(parent_id, discussion)
+        METADATA[children][parent_id] = (METADATA[children].get(parent_id) or []) + [claim]
 
         for k in location_keys:
             claim[k] = location[k]
     else:
         # Thesis or 0th node
-        PARENTS[claim['id']] = None
+        METADATA[parents][claim['id']] = None
     
     return claim
 
@@ -47,7 +48,7 @@ def set_tree_metadata(parent, total_votes):
         parent['level'] = 0
         parent['avg_impact'] = np.mean(list(parent['votes'].values())) / total_votes
 
-    subtree = CHILDREN.get(parent['id']) or []
+    subtree = METADATA[children].get(parent['id']) or []
 
     if subtree:
         for child in subtree:
@@ -92,6 +93,7 @@ def votes_for(obj, votes) -> dict:
     votes_by_id = votes.get(obj['id']) or [0] * len(vote_types)
     return dict(zip(vote_types, votes_by_id))
 
+
 def map_as_tree(discussions, with_tqdm=True):
     """Traverses all votes and claims from `discussions` for robustness calculations,
     throwing out unusable data and linking parent nodes to child nodes in the meantime.
@@ -101,9 +103,9 @@ def map_as_tree(discussions, with_tqdm=True):
         with_tqdm (bool): Determines if a progress bar should be spawned.
     """
     loop_wrap = tqdm if with_tqdm else lambda x: x
-    PARENTS = {}
-    CHILDREN = {}
-    VOTES = {}
+    METADATA[votes] = {}
+    METADATA[parents] = {}
+    METADATA[children] = {}
 
     discussions = useful_discussions_from(discussions)
 
@@ -129,5 +131,5 @@ def map_as_tree(discussions, with_tqdm=True):
         discussion['thesis_robustness'] = traverse_robustness(thesis, discussion, assign_values=True)
         discussion['avg_veracity'] = sum(thesis['votes'].values()) / 5
         
-        VOTES[discussion['id']] = discussion['votes']
+        METADATA[votes][discussion['id']] = discussion['votes']
         del discussion['votes']

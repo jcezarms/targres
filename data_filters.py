@@ -1,5 +1,7 @@
 """A varied scale of Kialo-specific data filtering functions.
 """
+from tree_mapping import METADATA, children
+
 vote_types = ['false', 'improbable', 'plausible', 'probable', 'true']
 
 
@@ -39,12 +41,12 @@ def useful_claims_from(claims):
     for claim in claims:
         if is_useless_claim(claim):
             useless.append(claim)
-            useless_children = children.get(claim['id']) or []
+            useless_children = METADATA[children].get(claim['id']) or []
             useless += useless_children
             
             parent_id = claim.get('parentId')
             if parent_id:
-                children[parent_id].remove(claim)
+                METADATA[children][parent_id].remove(claim)
             
     return [claim for claim in claims if claim not in useless]
 
