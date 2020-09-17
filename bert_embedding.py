@@ -1,6 +1,7 @@
 import torch
 import pandas as pd
 from time import time
+from typing import List
 from transformers import BertTokenizer, BertModel
 
 BERT_UNCASED = 'bert-base-uncased'
@@ -19,9 +20,13 @@ def pad_items(list_of_lists):
             padded.append(sublist[:pad_len])
         else:
             padded.append(sublist + [0] * len_to_pad)
+    
+    assert all([len(token) == 512 for token in padded]), \
+        "Padding length didn't meet BERT's treshold."
+
     return padded
 
-def generate_embeddings(alist, batch_size=100):
+def generate_embeddings(alist: List[str], batch_size=100):
     """Utilizes the BERT pre-trained model to generate embeddings for all within `alist`.
 
     Args:
