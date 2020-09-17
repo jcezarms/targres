@@ -47,14 +47,23 @@ def clean_text(text, lower=True, markdown=True, punctuation=True, stopwords=True
     
     return clean_text.strip()
 
-def camel_to_snake(name):
+def camel_to_snake(name: str) -> str:
+    """Turns camelCased `name` into snake_case.
+    """
     name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
 
-def snakecols(df):
+def snakecols(df: pd.DataFrame) -> dict:
+    """Makes a mapper dictionary, for renaming all columns to snake_case using `df.rename`.
+    """
     return dict([(col, camel_to_snake(col)) for col in df.columns])
 
-def discussions_to_df(discussions) -> pd.DataFrame:
+def discussions_to_df(discussions: list) -> pd.DataFrame:
+    """Generates a discussion-centered DataFrame from the `discussions` list.
+
+    Args:
+        discussions (list): Designed to be the output of the `tree_mapping.map_as_tree` method.
+    """
     discdf = pd.json_normalize(discussions).fillna(0)
     discdf.drop(columns=dropcols['discussions'], inplace=True)
 

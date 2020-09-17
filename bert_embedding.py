@@ -10,7 +10,7 @@ bert_model = BertModel.from_pretrained(BERT_UNCASED)
 bert_model = bert_model.cuda()
 
 def pad_items(list_of_lists):
-    """Right-padding of all within a list of lists, respecting BERT's input size limit (512).
+    """Right-side-padding of all within a `list_of_lists`, respecting BERT's input size limit (512).
     """
     padded = []
     pad_len = 512
