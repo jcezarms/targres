@@ -19,12 +19,23 @@ TARGRES is to help lead to intelligence that can receive a **debate as
 input**, and **output the answer** that's most robust - and likely
 right.  
 
-This implementation makes use of BERT's embedding features, `LGBMRegressor` and a custom scraped dataset of a thousand discussions from the [Kialo](https://kialo.com). Through these, this study aims to understand and rank the robustness of argumentations in a discussion, with a combination of
+This implementation makes use of [BERT](https://github.com/google-research/bert)'s embedding features, [`LGBMRegressor`](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html) and a [custom scraped dataset](./data) of a thousand discussions from the [Kialo](https://kialo.com). Through these, this study aims to understand and rank the robustness of argumentations in a discussion, with a combination of
 textual context, localized social impact (feedback from ratings) and
 ramifications (pros \& cons stemming from a given argumentation). 
 
-# Conceptualization and Implementation
+# Concepts and Implementation
 
 This is the final project of an ML Engineering specialization, so there are two main blocks of depth to be understood:
 - [The study paper](./TARGRES_Project_Paper.pdf) - contains the full research, mathematical constructs in support of TARGRES and model benchmarks.
-- [The project Notebook](./TARGRES.ipynb) - full implementation of the algorithm, along with documented sequential use of local modules.
+- [TARGRES.ipynb](./TARGRES.ipynb) - full implementation of the algorithm, along with documented sequential use of local modules.
+
+# Running the code
+
+The first necessary step to run the project Notebook entirely is to `pip install -r requirements.txt`. Dependencies there were compiled from the `requirements.in` file:
+- `torch` and `transformers` are required for BERT,
+- `lightgbm` for the regression model
+- remaining dependencies (`numpy`, `pandas`, `requests`...) for standard data manipulation
+
+> The notebook assumes a [CUDA-enabled pytorch installation](https://pytorch.org/get-started/locally/#with-cuda-1) to run BERT's embedding process. A ~2.5k CUDA cores, 12GB RAM GPU (compute 3.7) took ~1h16m to entirely embed the 96.7k rows in the dataset
+
+From this point on, assuming a succesful installation of the requirements, the excecution of [TARGRES.ipynb](./TARGRES.ipynb) can be sequential. Yet, scraping and preprocessing can be entirely skipped, as section "5. Intelligence Architecture" will load the Kialo preprocessed dataset from `data/clean_claims_df.pkl`.
