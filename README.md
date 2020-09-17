@@ -32,7 +32,7 @@ This is the final project of an ML Engineering specialization, so there are two 
 # Running the code
 
 The first necessary step to run the project Notebook entirely is to `pip install -r requirements.txt`. Dependencies there were compiled from the `requirements.in` file:
-- `torch` and `transformers` are required for BERT,
+- `torch` and `transformers` are required for BERT
 - `lightgbm` for the regression model
 - remaining dependencies (`numpy`, `pandas`, `requests`...) for standard data manipulation
 
