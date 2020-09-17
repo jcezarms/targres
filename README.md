@@ -25,6 +25,6 @@ ramifications (pros \& cons stemming from a given argumentation).
 
 # Conceptualization and Implementation
 
-This is the Capstone Project of a Machine Learning Engineering specialization, so there are two main blocks of depth to be understood:
-- [The study paper](./TARGRES_Project_Paper.pdf), containing all mathematical constructs in support of TARGRES.
-- [The project Notebook](./TARGRES.ipynb), with the full implementation of the algorithm, along with documented sequential use of local modules.
+This is the final project of an ML Engineering specialization, so there are two main blocks of depth to be understood:
+- [The study paper](./TARGRES_Project_Paper.pdf) - contains the full research, mathematical constructs in support of TARGRES and model benchmarks.
+- [The project Notebook](./TARGRES.ipynb) - full implementation of the algorithm, along with documented sequential use of local modules.
