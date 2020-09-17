@@ -3,7 +3,7 @@
 import numpy as np
 from tqdm import tqdm
 
-from data_filters import find_claim, is_thesis, is_zeroth_node, useful_claims_from, useful_discussions_from
+from data_filters import *
 
 METADATA = {}
 votes = 'votes'
