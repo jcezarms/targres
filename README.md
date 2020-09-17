@@ -19,7 +19,7 @@ TARGRES is to help lead to intelligence that can receive a **debate as
 input**, and **output the answer** that's most robust - and likely
 right.  
 
-This implementation makes use of [BERT](https://github.com/google-research/bert)'s embedding features, [`LGBMRegressor`](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html) and a [custom scraped dataset](./data) of a thousand discussions from the [Kialo](https://kialo.com) website. Through these, this study aims to understand and rank the robustness of argumentations in a discussion, with a combination of
+This implementation makes use of [BERT](https://github.com/google-research/bert)'s embedding features, [`LGBMRegressor`](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html) and a [custom scraped dataset](./data) of a thousand discussions from the [Kialo](https://kialo.com) website. Through these the study aims to understand and rank the robustness of argumentations in a discussion, with a combination of
 textual context, localized social impact (feedback from ratings) and
 ramifications (pros \& cons stemming from a given argumentation). 
 
