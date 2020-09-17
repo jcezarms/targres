@@ -3,6 +3,7 @@
 import re
 import nltk
 import string
+import pandas as pd
 from collections import Counter
 
 try:
@@ -13,6 +14,22 @@ from nltk.corpus import stopwords
 
 stop_words = Counter(stopwords.words('english')) # reduces complexity of stopword removal to ~O(1) with Counter
 
+dropcols = {
+    'discussions': [
+        'argumentCount', 'viewCount', 'participantCount', 'contributionCount',
+        'image', 'hasDefaultImage', 'language', 'effectiveRole', 'accessToken',
+        'latestActivity.accountId', 'latestActivity.type', 'latestActivity.date',
+        'arguments.touchedArguments', 'statistics.participantStatistics',
+        'statistics.accountInfos', 'arguments.locations', 'activitiesLastDay',
+        'activitiesLastWeek', 'isFresh', 'lastSeen', 'isArchived', 'isPublic',
+        'trending', 'popular', 'featured', 'rank', 'voteCount'
+    ],
+    'claims': [
+        'authorId', 'version', 'frontendOnlyLocation',
+        'lastModifiedForSitemaps', 'edited', 'votes', 'isOrigin',
+        'isDeleted', 'accepterId', 'copierId', 'discussionLinkTo'
+    ]
+}
 
 def clean_text(text, lower=True, markdown=True, punctuation=True, stopwords=True) -> str:
     """Removes Markdown links and NLP-standard formattings from `text`.
@@ -29,3 +46,40 @@ def clean_text(text, lower=True, markdown=True, punctuation=True, stopwords=True
         clean_text = ' '.join([word for word in clean_text.split() if word not in stop_words])
     
     return clean_text.strip()
+
+def camel_to_snake(name):
+    name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
+
+def snakecols(df):
+    return dict([(col, camel_to_snake(col)) for col in df.columns])
+
+def discussions_to_df(discussions) -> pd.DataFrame:
+    discdf = pd.json_normalize(discussions).fillna(0)
+    discdf.drop(columns=dropcols['discussions'], inplace=True)
+
+    statscols = dict([(col, col.split('.')[1]) for col in discdf.columns if '.' in col])
+    discdf.rename(mapper=statscols, axis='columns', inplace=True)
+
+    discdf.rename(mapper=snakecols(discdf), axis='columns', inplace=True)
+    return discdf
+
+def discussions_to_claim_df(discussions_df: pd.DataFrame) -> pd.DataFrame:
+    """Generates a one-claim-per-row processed DataFrame from `discussions_df`.
+
+    `discussions_df` is necessarily the result of the `discussions_to_df()` method.
+    """
+    claim_basedf = discussions_df.explode('claims').reset_index().drop(columns='index')
+    claimdf = claim_basedf.claims.apply(pd.Series)
+    claimdf.drop(columns=dropcols['claims'], inplace=True)
+
+    claimdf.rename(mapper=snakecols(claimdf), axis='columns', inplace=True)
+
+    claimcols = dict([(col, 'claim_' + col) for col in claimdf.columns])
+    claimdf.rename(mapper=claimcols, axis='columns', inplace=True)
+
+    claimdf = claimdf.join(claim_basedf.drop(columns='claims'))
+    discussioncols = dict([(col, 'disc_' + col) for col in claim_basedf.columns if col != 'claims'])
+    claimdf.rename(mapper=discussioncols, axis='columns', inplace=True)
+
+    return claimdf
