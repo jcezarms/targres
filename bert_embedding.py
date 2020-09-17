@@ -9,7 +9,7 @@ tokenizer = BertTokenizer.from_pretrained(BERT_UNCASED)
 bert_model = BertModel.from_pretrained(BERT_UNCASED)
 bert_model = bert_model.cuda()
 
-def pad_items(list_of_lists):
+def pad_items(list_of_lists: torch.Tensor) -> torch.Tensor:
     """Right-side-padding of all within a `list_of_lists`, respecting BERT's input size limit (512).
     """
     padded = []
@@ -26,7 +26,7 @@ def pad_items(list_of_lists):
 
     return padded
 
-def generate_embeddings(alist: List[str], batch_size=100):
+def generate_embeddings(alist: List[str], batch_size=100) -> torch.Tensor:
     """Utilizes the BERT pre-trained model to generate embeddings for all within `alist`.
 
     Args:

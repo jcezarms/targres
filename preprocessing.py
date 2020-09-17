@@ -54,7 +54,7 @@ def camel_to_snake(name: str) -> str:
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
 
 def snakecols(df: pd.DataFrame) -> dict:
-    """Makes a mapper dictionary, for renaming all columns to snake_case using `df.rename`.
+    """Makes a mapper dictionary, for renaming all `df.columns` to snake_case using `df.rename`.
     """
     return dict([(col, camel_to_snake(col)) for col in df.columns])
 
@@ -63,6 +63,9 @@ def discussions_to_df(discussions: list) -> pd.DataFrame:
 
     Args:
         discussions (list): Designed to be the output of the `tree_mapping.map_as_tree` method.
+
+    Returns:
+        (pd.DataFrame): a DataFrame based on `discussions`.
     """
     discdf = pd.json_normalize(discussions).fillna(0)
     discdf.drop(columns=dropcols['discussions'], inplace=True)
@@ -76,7 +79,11 @@ def discussions_to_df(discussions: list) -> pd.DataFrame:
 def discussions_to_claim_df(discussions_df: pd.DataFrame) -> pd.DataFrame:
     """Generates a one-claim-per-row processed DataFrame from `discussions_df`.
 
-    `discussions_df` is necessarily the result of the `discussions_to_df()` method.
+    Args:
+        discussions_df (pd.DataFrame): result of the `discussions_to_df()` method
+
+    Returns:
+        (pd.DataFrame): a DataFrame of claims also containing each claim's discussion metadata.
     """
     claim_basedf = discussions_df.explode('claims').reset_index().drop(columns='index')
     claimdf = claim_basedf.claims.apply(pd.Series)

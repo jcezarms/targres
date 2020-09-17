@@ -18,32 +18,36 @@ def get_discussions() -> list:
     return requests.get(f'{domain}/discussions', params=disc_params).json()['discussions']
 
 
-def get_stats(discussion) -> dict:
+def get_stats(discussion: dict) -> dict:
     """Retrieves real-time statistics for a `discussion` from Kialo.
     """
     path = f'https://www.kialo.com/api/v1/discussions/{discussion["id"]}/statistics'
     return requests.get(path).json()
 
 
-def get_args(discussion) -> dict:
+def get_args(discussion: dict) -> dict:
     """Retrieves argumentations within `discussion` from Kialo.
     """
     path = f'{domain}/arguments?discussionId={discussion["id"]}'
     return requests.get(path).json()
 
 
-def get_votes(discussion) -> dict:
+def get_votes(discussion: dict) -> dict:
     """Retrieves votes on both argumentations and the thesis itself.
     """
     path = f'{domain}/discussions/{discussion["id"]}/perspectives/1/votes?filter=all'
     return requests.get(path).json()['votes']
 
 
-def scrape_into(discussions, with_tqdm=True):
+def scrape_into(discussions: list, with_tqdm=True) -> None:
     """Loops the retrieval of statistics, votes and argumentations for all `discussions`.
 
     Accepts the response of `get_discussions()`, but was made separate from it 
     to organically prevent loss of progress in case of mid-loop exceptions.
+
+    This is an inline operation over the `discussions` list. The lists of
+    votes and claims for a discussion will be assigned to the discussion object
+    itself once retrieved from Kialo's API.
 
     Args:
         discussions (list): A list of discussions.

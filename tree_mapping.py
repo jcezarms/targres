@@ -1,4 +1,6 @@
 """Core functions for backtracking and reproducing dicussion-tree data structures from the scraped dataset.
+
+Most of this module's functions are inplace operations, purposefuly having a ` -> None` return type.
 """
 import numpy as np
 from tqdm import tqdm
@@ -14,8 +16,8 @@ location_keys = ['isOrigin', 'parentId', 'relation', 'isDeleted']
 vote_types = ['false', 'improbable', 'plausible', 'probable', 'true']
 
 
-def merge_location_data(claim: dict, discussion: dict):
-    """Adds metadata from (`parentId` and `isDeleted`, to `claim`) from Kialo's `locations` list.
+def merge_location_data(claim: dict, discussion: dict) -> None:
+    """Adds metadata (like `parentId` and `isDeleted`) into `claim` from Kialo's `locations` list.
     
     Also updates `claim`'s parent and children links, given the newly added `parentId`.
     """
@@ -41,7 +43,7 @@ def merge_location_data(claim: dict, discussion: dict):
     
     return claim
 
-def set_tree_metadata(parent: dict, total_votes: int):
+def set_tree_metadata(parent: dict, total_votes: int) -> None:
     """Traverses the subtree under `parent`, assigning metadata like level and avg. impact to all nodes.
     """
     if is_thesis(parent['id']):
@@ -60,13 +62,17 @@ def set_tree_metadata(parent: dict, total_votes: int):
     parent['pros'] = [child['id'] for child in subtree if child['relation'] == 1]
     parent['cons'] = [child['id'] for child in subtree if child['relation'] == -1]
 
-def traverse_robustness(claim: dict, discussion: dict, assign_values=True):
+def traverse_robustness(claim: dict, discussion: dict, assign_values=True) -> float:
     """Recursive robustness of a claim, based on its weight and the weights of its entire subtree.
     
     Args:
         claim (dict): The claim for which to calculate robustness.
         discussion (list): The discussion `claim` belongs to.
-        assign_values (bool): If set to `True`, calculated values will be assigned to the claims in the `robustness` attr.
+        assign_values (bool): If set to `True`, calculated values will be 
+            assigned to the claims as their `robustness` attribute.
+
+    Returns:
+        (float): The recursive robustness for the current `claim`.
     """
     pro_children = [find_claim(child_id, discussion) for child_id in claim['pros']]
     con_children = [find_claim(child_id, discussion) for child_id in claim['cons']]
@@ -92,15 +98,28 @@ def votes_for(obj: dict, votes: dict) -> dict:
     
     Each of Kialo's 5 rating types, from "false" to "true",
     will have their own vote count in the resulting dict, starting from 0.
-    Defaults all vote values to 0 if no entries are found.
+    Defaults all vote values to 0 if an entry of `obj['id']` isn't found in `votes`.
+
+    An example of the returned vote dictionary:
+    ```
+    {
+        'false': 17,
+        'improbable': 11,
+        'plausible': 5,
+        'probable':3,
+        'true': 20
+    }
+    ```
     """
     votes_by_id = votes.get(obj['id']) or [0] * len(vote_types)
     return dict(zip(vote_types, votes_by_id))
 
 
-def map_as_tree(discussions: list, with_tqdm=True):
+def map_as_tree(discussions: list, with_tqdm=True) -> None:
     """Traverses all votes and claims from `discussions` for robustness calculations,
     throwing out unusable data and linking parent nodes to child nodes in the meantime.
+
+    Parent and children links are kept by storing node IDs in the local `METADATA` dictionary.
 
     Args:
         discussions (list): A list of discussions.

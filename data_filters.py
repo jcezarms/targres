@@ -40,7 +40,7 @@ def is_useless_claim(claim) -> bool:
         claim.get('flag') is not None
     ])
 
-def useful_claims_from(claims: list):
+def useful_claims_from(claims: list) -> list:
     """Based on `is_useless_claim`, filters `claims` entries.
 
     If a condition of uselessness is met, both the tagged claim
@@ -60,7 +60,7 @@ def useful_claims_from(claims: list):
             
     return [claim for claim in claims if claim not in useless]
 
-def is_useful_discussion(discussion):
+def is_useful_discussion(discussion) -> bool:
     """If `discussion` contains a thesis node and a total vote count above 0, returns `True`.
     """
     return all([
@@ -68,8 +68,8 @@ def is_useful_discussion(discussion):
         discussion['statistics']['voteCount'] > 0
     ])
 
-def useful_discussions_from(discussions):
-    """Filters `discussions` based on `is_useful_discussion`.
+def useful_discussions_from(discussions) -> list:
+    """Filters `discussions` based on `is_useful_discussion()`.
 
     Discussions that don't attend these conditions cannot possibly
     be processed by the study's pipeline.
