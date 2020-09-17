@@ -5,13 +5,13 @@ from tree_mapping import METADATA, children
 vote_types = ['false', 'improbable', 'plausible', 'probable', 'true']
 
 
-def is_thesis(ID) -> bool:
+def is_thesis(ID: str) -> bool:
     """The broadest and simplest method for identifying Kialo thesis `ID`s.
     """
     return ID and ID.endswith('.1')
 
 
-def is_zeroth_node(obj) -> bool:
+def is_zeroth_node(obj: dict) -> bool:
     """Identifies Kialo root nodes.
     
     These root nodes were of no use in the scope of this study,
@@ -21,12 +21,12 @@ def is_zeroth_node(obj) -> bool:
     return obj.get('id') and obj['id'].endswith('.0')
 
 
-def find_claim(ID, discussion) -> dict:
+def find_claim(ID: str, discussion: dict) -> dict:
     """Finds the first (if any) claim object linked to `ID` and within `discussion`.
     """
     return next(claim for claim in discussion['arguments']['claims'] if claim['id'] == ID)
 
-def is_useless_claim(claim) -> bool:
+def is_useless_claim(claim: dict) -> bool:
     """Defines conditions for the uselessness of `claim`.
 
     Any claim that either a) has an ID that indicates it's the 0th ID node;
@@ -60,7 +60,7 @@ def useful_claims_from(claims: list) -> list:
             
     return [claim for claim in claims if claim not in useless]
 
-def is_useful_discussion(discussion) -> bool:
+def is_useful_discussion(discussion: dict) -> bool:
     """If `discussion` contains a thesis node and a total vote count above 0, returns `True`.
     """
     return all([
@@ -68,7 +68,7 @@ def is_useful_discussion(discussion) -> bool:
         discussion['statistics']['voteCount'] > 0
     ])
 
-def useful_discussions_from(discussions) -> list:
+def useful_discussions_from(discussions: list) -> list:
     """Filters `discussions` based on `is_useful_discussion()`.
 
     Discussions that don't attend these conditions cannot possibly
