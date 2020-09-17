@@ -12,10 +12,9 @@ idna==2.10                # via requests
 joblib==0.16.0            # via nltk, sacremoses, scikit-learn
 lightgbm==3.0.0           # via -r requirements.in
 nltk==3.5                 # via -r requirements.in
-numpy==1.19.2             # via -r requirements.in, lightgbm, pandas, pyarrow, scikit-learn, scipy, transformers
+numpy==1.19.2             # via -r requirements.in, lightgbm, pandas, scikit-learn, scipy, transformers
 packaging==20.4           # via transformers
 pandas==1.1.2             # via -r requirements.in
-pyarrow==1.0.1            # via -r requirements.in
 pyparsing==2.4.7          # via packaging
 python-dateutil==2.8.1    # via pandas
 pytz==2020.1              # via pandas

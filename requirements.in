@@ -4,5 +4,4 @@ torch
 pandas
 requests
 lightgbm
-pyarrow
 transformers
