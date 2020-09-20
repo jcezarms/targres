@@ -1,4 +1,8 @@
-# TARGRES
+<p align="center">
+    <img style="cursor: default;" src="./logo/logo.svg" height="400px" alt="TARGRES Logo" />
+</p>
+
+--------
 
 TARGRES, or **T**ree-based **Arg**umetation **Res**olution, is a method for determining the robustness of a collaboratively discussed thesis, where arguments and counter-arguments can be represented as a tree. Based on the imbalance between pro-thesis and anti-thesis robustness, TARGRES ultimately confirms or debunks the thesis - all, of course, limited by public opinion reflected in the data.
 
