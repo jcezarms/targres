@@ -35,14 +35,11 @@ There are two main blocks of in-depth content:
 
 # Running the code
 
-The first necessary step to run the project Notebook entirely is to `pip install -r requirements.txt`. Dependencies there were compiled from the `requirements.in` file:
-- `torch` and `transformers` are required for BERT
-- `lightgbm` for the regression model
-- remaining dependencies (`numpy`, `pandas`, `requests`...) for standard data manipulation
+The first necessary step to run the project Notebook entirely is to `pip install -r requirements.txt`.
 
 > The notebook assumes a [CUDA-enabled pytorch installation](https://pytorch.org/get-started/locally/#with-cuda-1) to run BERT's embedding process. A ~2.5k CUDA cores, 12GB RAM GPU (compute 3.7) took ~1h16m to entirely embed the 96.7k rows in the dataset
 
-From this point on, assuming a succesful installation of the requirements, the excecution of [TARGRES.ipynb](./TARGRES.ipynb) can be sequential. Yet, scraping and preprocessing can be entirely skipped, as section "5. Intelligence Architecture" will load the Kialo preprocessed dataset from `data/clean_claims_df.pkl`.
+Assuming a succesful installation of the requirements, the excecution of [TARGRES.ipynb](./TARGRES.ipynb) is sequential. Scraping and preprocessing can be entirely skipped, as section "5. Intelligence Architecture" will load the preprocessed dataset from `data/clean_claims_df.pkl`.
 
 # Next steps
 
