@@ -37,9 +37,10 @@ There are two main blocks of in-depth content:
 
 The first necessary step to run the project Notebook entirely is to `pip install -r requirements.txt`.
 
-> The notebook assumes a [CUDA-enabled pytorch installation](https://pytorch.org/get-started/locally/#with-cuda-1) to run BERT's embedding process. A ~2.5k CUDA cores, 12GB RAM GPU (compute 3.7) took ~1h16m to entirely embed the 96.7k rows in the dataset
+> The notebook assumes a [CUDA-enabled pytorch installation](https://pytorch.org/get-started/locally/#with-cuda-1) to run BERT's embedding process. A ~2.5k CUDA cores, 12GB RAM GPU (compute 3.7) took ~1h30m to entirely embed a 100k batch of rows.
 
-Assuming a succesful installation of the requirements, the excecution of [TARGRES.ipynb](./TARGRES.ipynb) is sequential. Scraping and preprocessing can be entirely skipped, as section "5. Intelligence Architecture" will load the preprocessed dataset from `data/clean_claims_df.pkl`.
+Assuming a succesful installation of the requirements, the excecution of [TARGRES.ipynb](./TARGRES.ipynb) is sequential.  
+Scraping and preprocessing can be entirely skipped, as section "5. Intelligence Architecture" will load the dataset from `data/clean_claims_df.pkl`.
 
 # Next steps
 
