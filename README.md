@@ -1,5 +1,5 @@
 <p align="center">
-    <img style="cursor: default;" src="./logo/logo_animated.svg" height="250px" alt="TARGRES Logo" />
+    <img style="cursor: default;" src="./logo/logo.svg" height="250px" alt="TARGRES Logo" />
 </p>
 
 --------
