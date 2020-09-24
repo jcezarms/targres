@@ -23,27 +23,29 @@ TARGRES is to help lead to intelligence that can receive a **debate as
 input**, and **output the answer** that's most robust - and likely
 right.  
 
-This implementation makes use of [BERT](https://github.com/google-research/bert)'s embedding features, [`LGBMRegressor`](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html) and a [custom scraped dataset](./data) of a thousand discussions from the [Kialo](https://kialo.com) website. Through these the study aims to understand and rank the robustness of argumentations in a discussion, with a combination of
+Through a [custom scraped dataset](./data) of discussions from the [Kialo](https://kialo.com) website, this study aims to understand and rank the robustness of argumentations in a discussion, with a combination of
 textual context, localized social impact (feedback from ratings) and
 ramifications (pros \& cons stemming from a given argumentation). 
 
 # Concept and Implementation
 
-There are two main blocks of in-depth content:
-- [The study paper](./TARGRES_Project_Paper.pdf) - contains the full research, mathematical constructs in support of TARGRES and model benchmarks.
+The two main blocks of in-depth content:
+- [TARGRES Paper](./TARGRES_Project_Paper.pdf) - all research, mathematical constructs in support of TARGRES and model benchmarks.
 - [TARGRES.ipynb](./TARGRES.ipynb) - full implementation of the algorithm, along with documented sequential use of local modules.
 
 # Running the code
 
-The first necessary step to run the project Notebook entirely is to `pip install -r requirements.txt`.
+The only necessary step: `pip install -r requirements.txt`.
 
 > The notebook assumes a [CUDA-enabled pytorch installation](https://pytorch.org/get-started/locally/#with-cuda-1) to run BERT's embedding process. A ~2.5k CUDA cores, 12GB RAM GPU (compute 3.7) took ~1h30m to entirely embed a 100k batch of rows.
 
-Assuming a succesful installation of the requirements, the excecution of [TARGRES.ipynb](./TARGRES.ipynb) is sequential.  
+Assuming a succesful installation of the requirements, the execution of [TARGRES.ipynb](./TARGRES.ipynb) is sequential.  
 Scraping and preprocessing can be entirely skipped, as section "5. Intelligence Architecture" will load the dataset from `data/clean_claims_df.pkl`.
 
 # Next steps
 
+- [ ] An open interface to interact with TARGRES.
+- [ ] Automate releases (e.g. through GitHub Actions).
 - [ ] Normalize model fairness, as done in [scikit-fairness](https://github.com/koaning/scikit-fairness).
     - Either team up with Kialo itself, or deduce userbase demographics.
 - [ ] Extrapolate TARGRES to external data (StackExchange or Reddit)
