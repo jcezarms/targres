@@ -25,7 +25,7 @@ right.
 
 Through a [custom scraped dataset](./data) of discussions from the [Kialo](https://kialo.com) website, this study aims to understand and rank the robustness of argumentations in a discussion, with a combination of
 textual context, localized social impact (feedback from ratings) and
-ramifications (pros \& cons stemming from a given argumentation). 
+ramifications (pros \& cons) stemming from a given argumentation. 
 
 # Concept and Implementation
 
