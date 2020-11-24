@@ -11,14 +11,14 @@ TARGRES, ou **T**ree-based **Arg**umetation **Res**olution (Resolução de Argum
 
 # Introdução
 
-A resolução de debates ajuda a moldar o progresso social e científico desde o início dos tempos modernos. Na era atual ela não é só importante offline - é, também, uma das bases da própria internet:
+A resolução de debates ajuda a moldar o progresso social e científico desde o início dos tempos. Na era atual ela não é só importante offline - é, também, uma das bases da própria internet:
 
 - StackOverflow e [mais de cem irmãos](https://stackexchange.com/sites)
 - [um](http://www.reddit.com/r/explainlikeimfive+doesanybodyelse+tipofmytongue+answers+explainlikeIAmA+relationship_advice+whatisthisthing+techsupport+explainlikeimcalvin+whatsthisbug+tipofmypenis+whatstheword+homeworkhelp+relationshipadvice+species+NoStupidQuestions) [grande](http://www.reddit.com/r/AskReddit+AskScience+AskHistorians+AskWomen+AskMen+AskCulinary+TrueAskReddit+AskSocialScience+AskEngineers+AskPhilosophy+AskScienceFiction+Ask_Politics+AskAcademia+AskTransgender+AskComputerScience+AskDrugs+AskFeminists+AskGames+AskPhotography+AskUk+AskStatistics+AskSciTech+AskSciTech+askGSM+AskModerators) [pedaço](http://www.reddit.com/r/help+findareddit+modhelp+csshelp+bugs+RESissues+askmoderators+aboutreddit) do Reddit
 - Quora
 
-... e os vários fóruns restantes. O mundo onipresente de Q&A (_Questions & Answers_, Perguntas & Respostas) foi inteiramente construído para prosperar sob a resolução de debates raramente unilaterais. O objetivo de TARGRES é direcionar o caminho à inteligência que pode receber um **debate como
-input**, e ter **como output a resposta** mais robusta - e, provavelmente, correta.  
+... e os vários fóruns similares. O mundo onipresente de Q&A (_Questions & Answers_, Perguntas & Respostas) foi inteiramente construído para prosperar sob a resolução de debates raramente unilaterais. O objetivo de TARGRES é direcionar o caminho à inteligência que pode receber um **debate como
+input**, e **como output a resposta mais robusta** - e provavelmente correta.  
 
 Através de um [dataset custom](./data) com discussões vindas do site [Kialo](https://kialo.com), este estudo almeja entender e rankear a robustez de argumentações em qualquer discussão, usando uma combinação de contexto, impacto social localizado (i.e. pontuação dos argumentos por outros usuários) e ramificações (prós \& contras) decorrentes de cada argumento. 
 

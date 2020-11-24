@@ -23,8 +23,8 @@ also one of the backbones of the internet:
 Q\&A was built to thrive on the resolution of various rarely one-sided
 debates. The goal of
 TARGRES is to help lead to intelligence that can receive a **debate as
-input**, and **output the answer** that's most robust - and likely
-right.  
+input**, and **output the most robust answer** - and likely the
+right one.  
 
 Through a [custom scraped dataset](./data) of discussions from the [Kialo](https://kialo.com) website, this study aims to understand and rank the robustness of argumentations in a discussion, with a combination of
 textual context, localized social impact (feedback from ratings) and
