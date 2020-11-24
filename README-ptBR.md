@@ -40,7 +40,7 @@ Após instalação com sucesso, a execução de [TARGRES.ipynb](./TARGRES.ipynb)
 # Próximos passos
 
 - [ ] Uma interface aberta na qual interagir com TARGRES.
-- [ ] Automação de releases (e.g. through GitHub Actions).
+- [ ] Automação de releases (e.g. através de GitHub Actions).
 - [ ] Normalizar a equidade (_fairness_), como feito em [scikit-fairness](https://github.com/koaning/scikit-fairness).
     - Em conjunto com o time da própria Kialo, ou deduzindo a demografia dos usuários do site.
 - [ ] Extrapolar TARGRES para dados externos (StackExchange ou Reddit)
