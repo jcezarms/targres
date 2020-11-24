@@ -2,7 +2,11 @@
     <img style="cursor: default;" src="./logo/logo.svg" height="250px" alt="TARGRES Logo" />
 </p>
 
---------
+| | |
+| --- | --- |
+| English | [Português](README-ptBR.md) |
+
+---
 
 TARGRES, or **T**ree-based **Arg**umetation **Res**olution, is a method for determining the robustness of a collaboratively discussed thesis, where arguments and counter-arguments can be represented as a tree. Based on the imbalance between pro-thesis and anti-thesis argumentation robustness, TARGRES ultimately confirms or debunks the thesis - all, of course, based on opinions reflected in the data.
 
@@ -27,15 +31,16 @@ Through a [custom scraped dataset](./data) of discussions from the [Kialo](https
 textual context, localized social impact (feedback from ratings) and
 ramifications (pros \& cons) stemming from a given argumentation. 
 
-# Concept and Implementation
+# Concept
+[TARGRES Paper](./TARGRES_Project_Paper.pdf) has the complete research, mathematical constructs in support of TARGRES and model benchmarks.
 
-The two main blocks of in-depth content:
-- [TARGRES Paper](./TARGRES_Project_Paper.pdf) - all research, mathematical constructs in support of TARGRES and model benchmarks.
-- [TARGRES.ipynb](./TARGRES.ipynb) - full implementation of the algorithm, along with documented sequential use of local modules.
+# How to use
+In [TARGRES.ipynb](./TARGRES.ipynb) you'll find the sequential documented guide on using the algorithm.
 
 # Running the code
 
-The only necessary step: `pip install -r requirements.txt`
+The only necessary step:  
+`pip install -r requirements.txt`
 
 > The notebook assumes a [CUDA-enabled pytorch installation](https://pytorch.org/get-started/locally/#with-cuda-1) to run BERT's embedding process. A GPU with ~2.5k CUDA cores and 12GB RAM (compute 3.7) took ~1h30m to embed a batch of 100k rows.
 
