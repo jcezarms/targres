@@ -47,8 +47,11 @@ After a successful installation, the execution of [TARGRES.ipynb](./TARGRES.ipyn
 
 # Next steps
 
+- [ ] An argument-type-identifier should come for individual argument analysis. Which is potentially a full-fledged project, by itself.
+    - Real-time impact involves strong single-argument strength analysis.
 - [ ] An open interface to interact with TARGRES.
 - [ ] Automate releases (e.g. through GitHub Actions).
 - [ ] Normalize model fairness, as done in [scikit-fairness](https://github.com/koaning/scikit-fairness).
     - Either team up with Kialo itself, or deduce userbase demographics.
-- [ ] Extrapolate TARGRES to external data (StackExchange or Reddit)
+- [ ] Extrapolate TARGRES to external data (StackExchange or Reddit, e.g. [/r/changemyview](https://www.reddit.com/r/changemyview))
+    - Labeling, adapting and running against [a well structured base argument](https://www.reddit.com/r/changemyview/comments/o3adet/cmv_antivax_doctors_and_nurses_and_other_licensed/) to start. Eventually a one-fits-_most_ implementation could be thought.
